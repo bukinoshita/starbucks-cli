@@ -1,0 +1,28 @@
+{
+  "name": "starbucks-cli",
+  "version": "0.0.0",
+  "description": "Starbucks store finder CLI",
+  "main": "index.js",
+  "repository": "git@github.com:bukinoshita/starbucks-cli.git",
+  "author": "Bu Kinoshita <bukinoshita@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "geocoder": "^0.2.3",
+    "meow": "^3.7.0",
+    "ora": "^1.2.0",
+    "starbucks": "^0.0.1",
+    "update-notifier": "^2.1.0"
+  },
+  "devDependencies": {
+    "xo": "^0.18.1"
+  },
+  "bin": {
+    "starbucks": "index.js"
+  },
+  "xo": {
+    "space": true,
+    "semicolon": false,
+    "esnext": true
+  }
+}
