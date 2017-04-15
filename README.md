@@ -2,6 +2,8 @@
 
 > Starbucks store finder CLI :coffee:
 
+<img src="https://cldup.com/WPl4dTCrIh.jpg"/>
+
 ## Install
 ```
 $ npm install -g starbucks-cli
