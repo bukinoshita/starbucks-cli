@@ -14,16 +14,19 @@ $ npm install -g starbucks-cli
 $ starbucks --help
 
 Usage:
+  $ starbucks                    Show 5 Starbucks near you
   $ starbucks <address>          Show 5 nearst Starbucks with address
   $ starbucks <zipcode>          Show 5 nearst Starbucks with zipcode
 
 Example:
-  $ starbucks '1201 S Figueroa St'
+  $ starbucks
+  $ starbucks '1201 S Figueroa St, Los Angeles, CA 90015, USA'
   $ starbucks 'M6K 3P6'
 ```
 
 ## Related
 - [starbucks](https://github.com/bukinoshita/starbucks) — API for this module
+- [wer](https://github.com/bukinoshita/wer) — Get your geolocation information :round_pushpin:
 
 ## License
 [MIT](https://github.com/bukinoshita/starbucks-cli/blob/master/LICENSE) &copy; Bu Kinoshita
