@@ -1,4 +1,4 @@
-# starbucks-cli [![Codeship Status for bukinoshita/starbucks-cli](https://app.codeship.com/projects/62dd2e00-0504-0135-38d5-2eadb3862a2e/status?branch=master)](https://app.codeship.com/projects/213473)
+# starbucks-cli [![Build Status](https://travis-ci.org/bukinoshita/starbucks-cli.svg?branch=master)](https://travis-ci.org/bukinoshita/starbucks-cli)
 
 > Starbucks store finder CLI :coffee:
 
