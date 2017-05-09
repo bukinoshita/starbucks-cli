@@ -1837,9 +1837,9 @@ sshpk@^1.7.0:
     jsbn "~0.1.0"
     tweetnacl "~0.14.0"
 
-starbucks@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/starbucks/-/starbucks-0.0.1.tgz#b5e7d9b1550c75b8aa38ff3d38f6e4ac79af32d5"
+starbucks-store-finder@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/starbucks-store-finder/-/starbucks-store-finder-0.0.3.tgz#233d3ff424188f6eccbe2ddbe5ae7c30b9ca2c7e"
   dependencies:
     got "^6.7.1"
 

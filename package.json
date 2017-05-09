@@ -14,7 +14,7 @@
     "geocoder": "^0.2.3",
     "meow": "^3.7.0",
     "ora": "^1.2.0",
-    "starbucks": "^0.0.1",
+    "starbucks-store-finder": "^0.0.3",
     "update-notifier": "^2.1.0",
     "wer": "^0.0.1"
   },

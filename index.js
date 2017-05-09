@@ -5,7 +5,7 @@ const meow = require('meow')
 const updateNotifier = require('update-notifier')
 const geocoder = require('geocoder')
 const ora = require('ora')
-const starbucks = require('starbucks')
+const starbucks = require('starbucks-store-finder')
 const wer = require('wer')
 const outputFormatter = require('./lib/output-formatter')
 
@@ -58,6 +58,7 @@ const run = () => {
       starbucks(opts)
         .then(res => {
           const list = JSON.parse(res)
+          console.log(list.stores[0].schedule)
           outputFormatter(list)
           spinner.stop()
         })
