@@ -25,7 +25,7 @@ Example:
 ```
 
 ## Related
-- [starbucks](https://github.com/bukinoshita/starbucks) — API for this module
+- [starbucks-store-finder](https://github.com/bukinoshita/starbucks-store-finder) — API for this module
 - [wer](https://github.com/bukinoshita/wer) — Get your geolocation information :round_pushpin:
 
 ## License
