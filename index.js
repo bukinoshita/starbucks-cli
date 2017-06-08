@@ -58,7 +58,6 @@ const run = () => {
       starbucks(opts)
         .then(res => {
           const list = JSON.parse(res)
-          console.log(list.stores[0].schedule)
           outputFormatter(list)
           spinner.stop()
         })
