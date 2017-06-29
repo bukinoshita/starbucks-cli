@@ -21,6 +21,13 @@
   "devDependencies": {
     "xo": "^0.18.1"
   },
+  "keywords": [
+    "starbucks",
+    "cli",
+    "coffee",
+    "store",
+    "finder"
+  ],
   "bin": {
     "starbucks": "index.js"
   },
