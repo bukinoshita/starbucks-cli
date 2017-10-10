@@ -2,6 +2,9 @@
 
 > Starbucks store finder CLI :coffee:
 
+**WARNING**: They closed their API, it won't work until find a workaround.
+
+
 <img src="https://cldup.com/WPl4dTCrIh.jpg"/>
 
 ## Install
