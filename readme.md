@@ -28,6 +28,12 @@ $ starbucks --help
     -l, --limit                     Limit of Starbucks to be shown
 ```
 
+
+## Demo
+
+<img src="demo.gif"/>
+
+
 ## Related
 
 - [starbucks-store-finder](https://github.com/bukinoshita/starbucks-store-finder) — API for this module
