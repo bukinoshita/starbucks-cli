@@ -1,6 +1,6 @@
 {
   "name": "starbucks-cli",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "Starbucks store finder CLI",
   "main": "index.js",
   "repository": "git@github.com:bukinoshita/starbucks-cli.git",
