@@ -3,70 +3,109 @@
 
 const meow = require('meow')
 const updateNotifier = require('update-notifier')
-const geocoder = require('geocoder')
+const geocoder = require('geocoder-geojson')
 const ora = require('ora')
 const starbucks = require('starbucks-store-finder')
 const wer = require('wer')
-const outputFormatter = require('./lib/output-formatter')
+const { grey } = require('chalk')
 
-const cli = meow(`
+const rightPad = require('./lib/right-pad')
+
+const cli = meow(
+  `
   Usage:
-    $ starbucks                    Show 5 Starbucks near you
-    $ starbucks <address>          Show 5 nearst Starbucks with address
-    $ starbucks <zipcode>          Show 5 nearst Starbucks with zipcode
+    $ starbucks                    Show Starbucks stores near you
+    $ starbucks <address>          Show Starbucks stores near address
+    $ starbucks <zipcode>          Show Starbucks stores near zipcode
 
   Example:
     $ starbucks
     $ starbucks '1201 S Figueroa St, Los Angeles, CA 90015, USA'
-    $ starbucks 'M6K 3P6'
-`)
+    $ starbucks 'M6K 3P6' --limit=50
 
-updateNotifier({pkg: cli.pkg}).notify()
-const spinner = ora('Finding Starbucks...')
+  Options:
+    -l, --limit                    Limit of Starbucks to be shown
+`,
+  {
+    alias: {
+      l: 'limit',
+      h: 'help',
+      v: 'version'
+    }
+  }
+)
 
-const run = () => {
-  if (cli.flags.h) {
-    cli.showHelp()
-  } else if (cli.input[0]) {
-    spinner.start()
-    const input = cli.input[0]
+updateNotifier({ pkg: cli.pkg }).notify()
 
-    geocoder.geocode(input, (err, {results}) => {
-      const {lat, lng} = results[0].geometry.location
-      const opts = {lat, lng}
+const run = async () => {
+  const input = cli.input[0]
+  const spinner = ora('Finding Starbucks...')
+  const limit = cli.flags.l || 10
 
-      if (err) {
-        return err
+  let lat
+  let lng
+  let city
+  let region
+  let country
+
+  spinner.start()
+
+  if (input) {
+    const location = await geocoder.google(input)
+
+    lat = location.features[0].geometry.coordinates[0]
+    lng = location.features[0].geometry.coordinates[1]
+    city = location.features[0].properties.administrative_area_level_2
+    region = location.features[0].properties.administrative_area_level_1
+    country = location.features[0].properties.country
+  } else {
+    const location = await wer()
+
+    lat = location.lat
+    lng = location.lng
+    city = location.city
+    region = location.region
+    country = location.country
+  }
+
+  try {
+    const options = { lat, lng, city, region, country }
+    const stores = await starbucks(options)
+
+    spinner.stop()
+
+    console.log(
+      `${grey(rightPad('Name', 40))} ${grey(rightPad('Address', 50))} ${grey(
+        rightPad('Open')
+      )}`
+    )
+
+    stores.map((res, index) => {
+      if (index < limit) {
+        const store = {
+          name: res.name,
+          address: res.address.streetAddressLine1,
+          city: res.address.city,
+          region: res.address.countrySubdivisionCode,
+          county: res.address.countyCode,
+          isOpen: res.openStatusText,
+          schedule: res.schedule
+        }
+
+        console.log(
+          `${rightPad(store.name, 40)} ${rightPad(
+            store.address,
+            50
+          )} ${rightPad(store.isOpen)}`
+        )
       }
 
-      starbucks(opts)
-        .then(res => {
-          const list = JSON.parse(res)
-          outputFormatter(list)
-          spinner.stop()
-        })
-        .catch(err => {
-          spinner.stop()
-          console.log(err)
-        })
+      return false
     })
-  } else {
-    spinner.start()
-    wer().then(({latitude, longitude}) => {
-      const opts = {lat: latitude, lng: longitude}
-
-      starbucks(opts)
-        .then(res => {
-          const list = JSON.parse(res)
-          outputFormatter(list)
-          spinner.stop()
-        })
-        .catch(err => {
-          spinner.stop()
-          console.log(err)
-        })
-    })
+  } catch (err) {
+    spinner.stop()
+    console.log(err)
   }
 }
 
-run(cli)
+run()
