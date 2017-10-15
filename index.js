@@ -7,6 +7,7 @@ const geocoder = require('geocoder-geojson')
 const ora = require('ora')
 const starbucks = require('starbucks-store-finder')
 const wer = require('wer')
+const shoutMessage = require('shout-message')
 const { grey } = require('chalk')
 
 const rightPad = require('./lib/right-pad')
@@ -74,34 +75,40 @@ const run = async () => {
 
     spinner.stop()
 
-    console.log(
-      `${grey(rightPad('Name', 40))} ${grey(rightPad('Address', 50))} ${grey(
-        rightPad('Open')
-      )}`
-    )
+    if (stores.length > 0) {
+      console.log(
+        `${grey(rightPad('Name', 40))} ${grey(rightPad('Address', 50))} ${grey(
+          rightPad('Open')
+        )}`
+      )
 
-    stores.map((res, index) => {
-      if (index < limit) {
-        const store = {
-          name: res.name,
-          address: res.address.streetAddressLine1,
-          city: res.address.city,
-          region: res.address.countrySubdivisionCode,
-          county: res.address.countyCode,
-          isOpen: res.openStatusText,
-          schedule: res.schedule
+      stores.map((res, index) => {
+        if (index < limit) {
+          const store = {
+            name: res.name,
+            address: res.address.streetAddressLine1,
+            city: res.address.city,
+            region: res.address.countrySubdivisionCode,
+            county: res.address.countyCode,
+            isOpen: res.openStatusText,
+            schedule: res.schedule
+          }
+
+          console.log(
+            `${rightPad(store.name, 40)} ${rightPad(
+              store.address,
+              50
+            )} ${rightPad(store.isOpen)}`
+          )
         }
 
-        console.log(
-          `${rightPad(store.name, 40)} ${rightPad(
-            store.address,
-            50
-          )} ${rightPad(store.isOpen)}`
-        )
-      }
+        return false
+      })
 
       return false
-    })
+    }
+
+    return shoutMessage(`Couldn't find any Starbucks store near you...`)
   } catch (err) {
     spinner.stop()
     console.log(err)

@@ -6,7 +6,13 @@
   "repository": "git@github.com:bukinoshita/starbucks-cli.git",
   "author": "Bu Kinoshita <bukinoshita@gmail.com>",
   "license": "MIT",
-  "keywords": ["starbucks", "cli", "coffee", "store", "finder"],
+  "keywords": [
+    "starbucks",
+    "cli",
+    "coffee",
+    "store",
+    "finder"
+  ],
   "bin": {
     "starbucks": "index.js"
   },
@@ -19,14 +25,18 @@
     "geocoder-geojson": "^1.11.0",
     "meow": "^3.7.0",
     "ora": "^1.2.0",
-    "starbucks-store-finder": "^0.0.3",
+    "shout-message": "^0.0.2",
+    "starbucks-store-finder": "^1.0.0",
     "update-notifier": "^2.1.0",
     "wer": "^1.0.0"
   },
   "devDependencies": {
+    "eslint-config-prettier": "^2.6.0",
     "xo": "^0.18.1"
   },
   "xo": {
-    "extends": ["prettier"]
+    "extends": [
+      "prettier"
+    ]
   }
 }
