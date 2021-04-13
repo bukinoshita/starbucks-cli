@@ -11,6 +11,12 @@ $ npm install -g starbucks-cli
 
 ## Usage
 
+Add your application configuration to your .env file in the root of your project:
+
+```
+GOOGLE_MAP_API_KEY=YOURGOOGLEMAPAPIKEY
+```
+
 ```bash
 $ starbucks --help
 
