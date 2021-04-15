@@ -3,14 +3,16 @@
 
 const meow = require('meow')
 const updateNotifier = require('update-notifier')
-const geocoder = require('geocoder-geojson')
 const ora = require('ora')
 const starbucks = require('starbucks-store-finder')
 const wer = require('wer')
 const shoutMessage = require('shout-message')
-const { grey } = require('chalk')
+const { grey, yellow } = require('chalk')
 
 const rightPad = require('./lib/right-pad')
+const google = require('./geodata')
+
+require('dotenv').config();
 
 const cli = meow(
   `
@@ -52,7 +54,13 @@ const run = async () => {
   spinner.start()
 
   if (input) {
-    const location = await geocoder.google(input)
+    if (!process.env.GOOGLE_MAP_API_KEY) {
+      spinner.stop()
+      return shoutMessage(`${yellow("You should set env key..")}`)
+    }
+
+    const GOOGLE_MAP_API_KEY = process.env.GOOGLE_MAP_API_KEY;
+    const location = await google(input, { key: GOOGLE_MAP_API_KEY })
 
     lat = location.features[0].geometry.coordinates[0]
     lng = location.features[0].geometry.coordinates[1]
@@ -63,7 +71,7 @@ const run = async () => {
     const location = await wer()
 
     lat = location.lat
-    lng = location.lng
+    lng = location.long
     city = location.city
     region = location.region
     country = location.country
